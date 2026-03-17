@@ -46,23 +46,14 @@ The policy evaluates the request against multiple authorization criteria:
 opa eval -i input/input.json -d authz.rego -d rules.json "data.vwg.authz.allow"
 ```
 
+```bash
+opa eval -i input/mcp_input.json -d mcp_authz.rego -d mcp_rules.json "data.vwg.mcp_authz.allow"
+```
+
 ### Running Tests
 
 ```bash
 opa test -v .
-```
-
-## Project Structure
-
-```
-├── authz.rego                 # Main authorization policy
-├── authz_test.rego           # Policy tests
-├── input/
-│   ├── input.json            # Sample request payload
-│   └── gw.json               # Policy rules and configuration
-├── rules/
-│   └── rules.json            # Generated policy rules
-└── README.md
 ```
 
 ## Requirements

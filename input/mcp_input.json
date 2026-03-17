@@ -1,0 +1,14 @@
+{
+  "request": {
+    "tool_name": "get_vehicle_telemetry",
+    "arguments": {
+      "brand": "porsche",
+      "vin": "WP0123456789"
+    }
+  },
+  "token": {
+    "tenant_id": "porsche",
+    "roles": ["Global_Diagnostic_Tech"],
+    "data_clearance": "confidential"
+  }
+}

@@ -3,6 +3,9 @@ __pycache__/
 *.py[codz]
 *$py.class
 
+rules.json
+mcp_rules.json
+
 # C extensions
 *.so
 
