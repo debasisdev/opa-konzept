@@ -1,13 +1,14 @@
 package vwg.authz
 
-import future.keywords.in
-import future.keywords.every
+# 1. Use the modern Rego v1 syntax instead of future keywords
+import rego.v1
 
 # Default to deny
 default allow := false
 
 # The main evaluation block
-allow {
+# 2. Added the mandatory 'if' keyword here
+allow if {
     # 1. FIND THE RULE: Loop through the JSON rules to find the matching endpoint and method
     some rule in data.policy.rules
     input.request.matched_route == rule.endpoint_pattern
