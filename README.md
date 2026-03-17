@@ -43,7 +43,7 @@ The policy evaluates the request against multiple authorization criteria:
 ### Running Policy Evaluation
 
 ```bash
-opa eval -i input/input.json -d authz.rego -d policy/rules.json "data.vwg.authz.allow"
+opa eval -i input/input.json -d authz.rego -d rules.json "data.vwg.authz.allow"
 ```
 
 ### Running Tests

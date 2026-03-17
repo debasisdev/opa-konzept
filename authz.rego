@@ -10,7 +10,7 @@ default allow := false
 # 2. Added the mandatory 'if' keyword here
 allow if {
     # 1. FIND THE RULE: Loop through the JSON rules to find the matching endpoint and method
-    some rule in data.policy.rules
+    some rule in data.rules.rules
     input.request.matched_route == rule.endpoint_pattern
     input.request.method in rule.methods
 
