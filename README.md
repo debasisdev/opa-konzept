@@ -31,3 +31,9 @@ To run the OPA evaluation against this payload, use:
 ```bash
 opa eval -i input.json -d gw.json -d authz.rego "data.vwg.authz.allow"
 ```
+
+To run the OPA test against asample payload, use:
+
+```bash
+opa test -v .
+```
