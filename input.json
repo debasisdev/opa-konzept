@@ -1,0 +1,19 @@
+{
+  "request": {
+    "method": "GET",
+    "matched_route": "/api/v1/brands/{brand}/vehicles/*/battery-status",
+    "path_params": {
+      "brand": "porsche",
+      "vin": "WP0123456789"
+    },
+    "headers": {
+      "X-VWG-Use-Case": "predictive_maintenance"
+    }
+  },
+  "token": {
+    "tenant_id": "porsche",
+    "roles": ["Global_Diagnostic_Tech"],
+    "data_clearance": "confidential",
+    "region": "EU"
+  }
+}
