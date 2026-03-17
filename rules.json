@@ -4,8 +4,9 @@
   "rules": [
     {
       "endpoint_pattern": "/api/v1/brands/{brand}/vehicles/*/battery-status",
-      "methods": ["GET"],
-      
+      "methods": [
+        "GET"
+      ],
       "rbac": {
         "logic": "ANY",
         "roles": [
@@ -14,29 +15,26 @@
           "Dealer_Service_Agent"
         ]
       },
-      
       "tenant_isolation": {
         "enabled": true,
         "enforcement_type": "strict_match",
         "url_parameter": "brand",
-        "expected_token_claim": "brand_affiliation"
+        "expected_token_claim": "tenant_id"
       },
-      
       "abac": {
         "match_all": [
           {
-            "attribute": "clearance_level",
-            "operator": "GTE", 
-            "value": 2 
+            "attribute": "data_clearance",
+            "operator": "EQ",
+            "value": "confidential"
           },
           {
-            "attribute": "assigned_region",
-            "operator": "IN",
-            "value": ["EU_WEST", "EU_CENTRAL"]
+            "attribute": "region",
+            "operator": "EQ",
+            "value": "EU"
           }
         ]
       },
-      
       "use_case_constraints": {
         "header_key": "X-VWG-Use-Case",
         "allowed_values": [
