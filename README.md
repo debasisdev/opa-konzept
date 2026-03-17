@@ -29,11 +29,11 @@ It needs to look something like this:
 To run the OPA evaluation against this payload, use:
 
 ```bash
-opa eval -i input.json -d gw.json -d authz.rego "data.vwg.authz.allow"
+opa eval -i input/input.json -d input/gw.json -d rules/rules.json "data.vwg.authz.allow"
 ```
 
-To run the OPA test against asample payload, use:
+To run the OPA test against a sample payload, use:
 
 ```bash
-opa test -v .
+opa test -v rules/
 ```
