@@ -1,0 +1,33 @@
+paths:
+  /api/v1/brands/{brand}/vehicles/{vin}/battery-status:
+    get:
+      summary: Retrieve live HV battery telemetry
+      operationId: getBatteryStatus
+      
+      # Custom VWG Authorization Block
+      x-authz:
+        # 1. Tenant / Brand Filtering
+        tenant_context:
+          require_jwt_match: true
+          path_param: "brand"     # The {brand} in the URL must match...
+          jwt_claim: "tenant_id"  # ...the "tenant_id" claim in the KIRA JWT
+        
+        # 2. RBAC (KIRA Roles)
+        allowed_kira_roles:
+          - "App_FleetMon_Admin"
+          - "Global_Diagnostic_Tech"
+          - "Dealer_Service_Agent"
+          
+        # 3. ABAC (Fine-Grained Attributes)
+        required_attributes:
+          data_clearance: "confidential"
+          region: "EU" # Ensures US users can't read EU vehicle data
+          
+        # 4. Use-Case / Purpose-Bound Access
+        allowed_use_cases:
+          - "predictive_maintenance"
+          - "remote_roadside_assistance"
+          
+      responses:
+        '200':
+          description: Successful telemetry retrieval

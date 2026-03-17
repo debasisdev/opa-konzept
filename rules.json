@@ -1,0 +1,49 @@
+{
+  "api_group": "vehicle_telemetry_services",
+  "version": "1.0",
+  "rules": [
+    {
+      "endpoint_pattern": "/api/v1/brands/{brand}/vehicles/*/battery-status",
+      "methods": ["GET"],
+      
+      "rbac": {
+        "logic": "ANY",
+        "roles": [
+          "App_FleetMon_Admin",
+          "Global_Diagnostic_Tech",
+          "Dealer_Service_Agent"
+        ]
+      },
+      
+      "tenant_isolation": {
+        "enabled": true,
+        "enforcement_type": "strict_match",
+        "url_parameter": "brand",
+        "expected_token_claim": "brand_affiliation"
+      },
+      
+      "abac": {
+        "match_all": [
+          {
+            "attribute": "clearance_level",
+            "operator": "GTE", 
+            "value": 2 
+          },
+          {
+            "attribute": "assigned_region",
+            "operator": "IN",
+            "value": ["EU_WEST", "EU_CENTRAL"]
+          }
+        ]
+      },
+      
+      "use_case_constraints": {
+        "header_key": "X-VWG-Use-Case",
+        "allowed_values": [
+          "predictive_maintenance",
+          "remote_roadside_assistance"
+        ]
+      }
+    }
+  ]
+}
