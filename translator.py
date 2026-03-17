@@ -96,4 +96,4 @@ def convert_oas_to_policy(yaml_file_path, output_json_path):
 
 if __name__ == "__main__":
     # Ensure you have 'oas.yaml' in the same directory, or update the paths below.
-    convert_oas_to_policy("oas.yaml", "rules/rules.json")
+    convert_oas_to_policy("owner/oas.yaml", "rules/rules.json")
