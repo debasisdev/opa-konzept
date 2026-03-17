@@ -1,0 +1,42 @@
+tools:
+  - name: get_vehicle_telemetry
+    description: Retrieves live high-voltage battery telemetry for a specific vehicle.
+    inputSchema:
+      type: object
+      properties:
+        brand:
+          type: string
+          description: The vehicle brand (e.g., porsche, audi)
+        vin:
+          type: string
+          description: The Vehicle Identification Number
+      required: [brand, vin]
+    
+    # Custom VWG Authorization Block for the MCP Tool
+    x-mcp-authz:
+      # 1. Tenant / Brand Filtering (Mapping JSON-RPC args to the JWT)
+      tenant_context:
+        require_jwt_match: true
+        argument_name: "brand"    # The AI must pass a brand argument that matches...
+        jwt_claim: "tenant_id"    # ...the human's tenant_id claim.
+
+      # 2. RBAC (KIRA Roles)
+      allowed_kira_roles:
+        - "Global_Diagnostic_Tech"
+        - "AI_Agent_Supervisor"
+
+      # 3. ABAC (Fine-Grained Attributes)
+      required_attributes:
+        data_clearance: "confidential"
+
+  - name: search_confluence_docs
+    description: Searches internal VWG engineering wiki.
+    inputSchema:
+      type: object
+      properties:
+        query:
+          type: string
+    
+    x-mcp-authz:
+      allowed_kira_roles:
+        - "Standard_Employee"

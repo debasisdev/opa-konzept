@@ -60,7 +60,7 @@ valid_input := {
 test_allow_valid_request if {
     # Notice we now inject BOTH the input AND the mocked JSON data
     allow with input as valid_input
-          with data.rules as mock_policy_data
+          with data.rules as mock_policy_data.rules
 }
 
 test_deny_cross_tenant_access if {
@@ -74,7 +74,7 @@ test_deny_cross_tenant_access if {
         }
     }
     not allow with input as invalid_tenant_input
-              with data.rules as mock_policy_data
+              with data.rules as mock_policy_data.rules
 }
 
 test_deny_missing_role if {
@@ -88,7 +88,7 @@ test_deny_missing_role if {
         }
     }
     not allow with input as invalid_role_input
-              with data.rules as mock_policy_data
+              with data.rules as mock_policy_data.rules
 }
 
 test_deny_wrong_region if {
@@ -102,7 +102,7 @@ test_deny_wrong_region if {
         }
     }
     not allow with input as invalid_region_input
-              with data.rules as mock_policy_data
+              with data.rules as mock_policy_data.rules
 }
 
 test_deny_unapproved_use_case if {
@@ -116,5 +116,5 @@ test_deny_unapproved_use_case if {
         "token": valid_input.token
     }
     not allow with input as invalid_header_input
-              with data.rules as mock_policy_data
+              with data.rules as mock_policy_data.rules
 }
